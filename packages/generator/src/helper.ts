@@ -308,12 +308,20 @@ const drawInputByTextSchema = (arg: {
       const textWidth =
         fontValue.widthOfTextAtSize(splitedLine, size) +
         (splitedLine.length - 1) * characterSpacing;
+      const translation =
+        lineHeight *
+          size *
+          (inputLineIndex + splitedLineIndex + beforeLineOver) -
+        (lineHeight === 0 ? 0 : ((lineHeight - 1) * size) / 2);
+      const x =
+        calcX(templateSchema.position.x, alignment, width, textWidth) -
+        -translation * Math.sin(rotate.angle * (Math.PI / 180));
+      const y =
+        calcY(templateSchema.position.y, pageHeight, size) -
+        translation * Math.cos(rotate.angle * (Math.PI / 180));
       page.drawText(splitedLine, {
-        x: calcX(templateSchema.position.x, alignment, width, textWidth),
-        y:
-          calcY(templateSchema.position.y, pageHeight, size) -
-          lineHeight * size * (inputLineIndex + splitedLineIndex + beforeLineOver) -
-          (lineHeight === 0 ? 0 : ((lineHeight - 1) * size) / 2),
+        x,
+        y,
         rotate,
         size,
         color,
