@@ -1,6 +1,3 @@
-// TODO そもそもこのpdfjs-distはtscでビルドできない
-// 昔のpdfmeのソースからwebpackのビルドに戻す
-// 多分tree-shakingは動かないかもしれないけど、とりあえず動くようにするべき
 // @ts-ignore
 import PDFJSWorker from 'pdfjs-dist/build/pdf.worker.entry.js';
 import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist/legacy/build/pdf.js';
@@ -235,13 +232,6 @@ const pt2mm = (pt: number) => {
   const mmRatio = 0.3527;
 
   return parseFloat(String(pt)) * mmRatio;
-};
-
-export const px2mm = (px: number) => {
-  // http://www.unitconversion.org/typography/millimeters-to-pixels-y-conversion.html
-  const mmRatio = 0.264583333;
-
-  return parseFloat(String(px)) * mmRatio;
 };
 
 export const getPdfPageSizes = async (pdfBlob: Blob) => {
